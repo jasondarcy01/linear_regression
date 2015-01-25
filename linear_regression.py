@@ -20,18 +20,18 @@ loansData = pd.read_csv('https://spark-public.s3.amazonaws.com/dataanalysis/loan
 # term = list(map((lambda x: x[:-6]), tm))
 # print term
 
-fc = loansData['FICO.Range']
-fico = map(lambda x: x.split('-'), fc)
-loansData['FICO.Score'] = map(lambda x: min(x), fico)
+fr = loansData['FICO.Range']
+fr_min = map(lambda x: x.split('-'), fr)
+loansData['FICO.Score'] = map(lambda x: min(x), fr_min)
 
-fc2 = loansData['FICO.Score'].astype(int)
+loansData['FICO.Score'] = loansData['FICO.Score'].astype(int)
 
-print fc2
+print loansData['FICO.Score']
 
 import matplotlib.pyplot as plt
 
 plt.figure()
-fc2.hist()
+loansData['FICO.Score'].hist()
 plt.show()
 
 # print loansData['FICO.Score'].dtypes
